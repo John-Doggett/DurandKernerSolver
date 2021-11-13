@@ -1,4 +1,5 @@
 package durandKernerSolver;
+
 import java.util.ArrayList;
 // Copyright John Doggett 2021.
 
@@ -30,7 +31,6 @@ public class DurandKernerSolver {
 	}
 
 	private complexNumber solvePX(complexNumber x) {
-
 		int power = coefficients.length;
 		complexNumber output = new complexNumber(0, 0);
 		while (power >= 0) {
@@ -79,8 +79,8 @@ public class DurandKernerSolver {
 	// is imaginary part of each coefficient. Will return a 2d array
 	// of the roots of the polynomial, with each root as a complex number;
 	// the first array is the real part of each root, and the second array
-	// is the imaginary part of each root. Will throw 
-	// IllegalArgumentException if both parameter arrays do not equal each 
+	// is the imaginary part of each root. Will throw
+	// IllegalArgumentException if both parameter arrays do not equal each
 	// other, or are less than 3 elements in length.
 	public static double[][] solvePolynomial(double[] realCoEf, double[] imagCoEf) {
 		if (realCoEf.length != imagCoEf.length || realCoEf.length < 3) {
@@ -89,7 +89,7 @@ public class DurandKernerSolver {
 		complexNumber highestCoefficient = new complexNumber(realCoEf[0], imagCoEf[0]);
 		complexNumber[] coefficients = new complexNumber[realCoEf.length - 1];
 		for (int a = 0; a < coefficients.length; a++) {
-			coefficients[a] = (new complexNumber(realCoEf[a + 1], imagCoEf[a + 1]).divide(highestCoefficient));
+			coefficients[a] = (new complexNumber(realCoEf[a + 1], imagCoEf[a + 1])).divide(highestCoefficient);
 		}
 
 		DurandKernerSolver temp = new DurandKernerSolver(coefficients);
@@ -99,6 +99,7 @@ public class DurandKernerSolver {
 		while (changedMuch) {
 			temp.iterate();
 			if (temp.count > 10) {
+
 				changedMuch = false;
 				for (int a = 0; a < temp.numOfRoots; a++) {
 					complexNumber difference = temp.roots.get(temp.count * temp.numOfRoots + a)
@@ -114,7 +115,7 @@ public class DurandKernerSolver {
 		double[][] output = new double[2][temp.numOfRoots];
 		for (int a = 0; a < temp.numOfRoots; a++) {
 			output[0][a] = temp.roots.get(temp.count * temp.numOfRoots + a).realConstant;
-			output[1][a] = temp.roots.get(temp.count * temp.numOfRoots + a).realConstant;
+			output[1][a] = temp.roots.get(temp.count * temp.numOfRoots + a).imagineryConstant;
 		}
 		return output;
 	}
